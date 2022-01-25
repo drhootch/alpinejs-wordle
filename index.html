@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlpineJS Wordle Clone</title>
+    <link rel="stylesheet" href="game.css">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div id="game" x-data="game">
+        <div class="message" x-show="gameState!==null">
+            <span x-show="gameState">Splendid
+                <pre x-text="result"></pre>
+            </span>
+            <span x-show="!gameState">The correct word was <span x-text="correctWord"></span></span>
+        </div>
+        <header>
+            <h1>AlpineJS Wordle Clone</h1>
+        </header>
+        <div id="board-container">
+            <div id="board-container-aspect">
+                <div id="board">
+                    <template x-for="tile in rows*columns">
+                        <div class="tile"
+                            x-text="tries?.[getRowColumn(tile).row]?.[getRowColumn(tile).column] ?? (getRowColumn(tile).row===tries.length ? currentTry?.[getRowColumn(tile).column]: null)"
+                            x-bind:data-state="letterState(tries?.[getRowColumn(tile).row]?.[getRowColumn(tile).column], getRowColumn(tile).column)">
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+        <div id="keyboard" @click="letterClicked" @keyup.window="insertLetter(isLetter($event.key))">
+            <div class="row">
+                <button><span>q</span></button>
+                <button><span>w</span></button>
+                <button><span>e</span></button>
+                <button><span>r</span></button>
+                <button><span>t</span></button>
+                <button><span>y</span></button>
+                <button><span>u</span></button>
+                <button><span>i</span></button>
+                <button><span>o</span></button>
+                <button><span>p</span></button>
+            </div>
+            <div class="row">
+                <button><span>a</span></button>
+                <button><span>s</span></button>
+                <button><span>d</span></button>
+                <button><span>f</span></button>
+                <button><span>g</span></button>
+                <button><span>h</span></button>
+                <button><span>j</span></button>
+                <button><span>k</span></button>
+                <button><span>l</span></button>
+            </div>
+            <div class="row">
+                <button @click.stop="enterClicked" @keyup.enter.window="enterClicked">
+                    <span>Enter</span>
+                </button>
+                <button><span>z</span></button>
+                <button><span>x</span></button>
+                <button><span>c</span></button>
+                <button><span>v</span></button>
+                <button><span>b</span></button>
+                <button><span>n</span></button>
+                <button><span>m</span></button>
+                <button @click.stop="removeClicked" @keyup.backspace.window="removeClicked">
+                    <span>Delete</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
