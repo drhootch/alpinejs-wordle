@@ -15,8 +15,8 @@
 
 <body>
     <div id="game" x-data="game">
-        <div class="message" x-show="toastMessage!==null" x-text="toastMessage"></div>
-        <div class="message" x-show="gameState!==null">
+        <div class="message" x-show="toastMessage!==null" x-text="toastMessage" x-cloak></div>
+        <div class="message" x-show="gameState!==null" x-cloak>
             <div x-show="gameState">Well done!
                 <pre x-text="gameResult"></pre>
             </div>

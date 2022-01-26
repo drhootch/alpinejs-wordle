@@ -12,6 +12,10 @@ body {
     overflow-y: hidden;
 }
 
+[x-cloak] {
+    display: none !important;
+}
+
 #game {
     width: 100%;
     max-width: 500px;
