@@ -47,18 +47,19 @@ body {
     height: fit-content;
     color: #1a1a1b;
     border-bottom: 1px solid #d3d6da;
+    padding: 0 10px;
 }
 
 #game header .title {
     font-weight: 700;
-    font-size: 36px;
+    font-size: 25px;
     letter-spacing: 0.2rem;
     text-transform: uppercase;
-    text-align: center;
-    position: absolute;
-    left: 0;
-    right: 0;
     pointer-events: none;
+}
+
+#game header .github-link {
+    width: 30px;
 }
 
 #board-container {
