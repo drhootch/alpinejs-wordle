@@ -8,18 +8,40 @@ document.addEventListener('alpine:init', () => {
         },
         columns: 5,
         rows: 6,
+        correctWord: 'great',
+        currentTry: '',
+        enteredTries: [],
+        _states: { "correct": "🟩", "present": "🟨", "absent": "⬜" },
+        get gameState() {
+            if (this.enteredTries.map(t => t.toLowerCase()).includes(this.correctWord.toLowerCase())) return true;
+            if (this.enteredTries.length === this.rows) return false;
+            return null;
+        },
+        get gameResult() {
+            let result = "";
+            this.enteredTries.forEach((t, r) => {
+                result += t.split("").map((l, c) => this._states[this.getLetterState(r * this.columns + (c + 1))]).join("")
+                result += "\n"
+            });
+            return result;
+        },
         getRowColumn(tile) {
             return { row: Math.floor((tile - 1) / this.columns), column: ((tile - 1) % this.columns) }
         },
-        correctWord: 'great',
-        currentTry: '',
-        tries: [],
-        states: { "correct": "🟩", "present": "🟨", "absent": "⬜" },
-        letterState(letter, position) {
-            if (letter === undefined) return 'empty';
+        getLetter(tile) {
+            const { row, column } = this.getRowColumn(tile);
+            return this.enteredTries?.[row]?.[column] ?? (row === this.enteredTries.length ? this.currentTry?.[column] : null)
+        },
+        getLetterState(tile) {
+            const { row, column } = this.getRowColumn(tile);
+            const letter = this.getLetter(tile);
+            if (row === this.enteredTries.length && letter) {
+                return "tbd";
+            }
+            if (!letter) return 'empty';
             let i = this.correctWord.toLowerCase().indexOf(letter.toLowerCase())
             if (i >= 0) {
-                if (i === position) return 'correct';
+                if (i === column) return 'correct';
                 return 'present';
             }
             return 'absent';
@@ -39,7 +61,7 @@ document.addEventListener('alpine:init', () => {
         },
         enterClicked() {
             if (this.currentTry?.length === this.columns) {
-                this.tries.push(this.currentTry)
+                this.enteredTries.push(this.currentTry)
                 this.currentTry = '';
             }
         },
@@ -48,24 +70,12 @@ document.addEventListener('alpine:init', () => {
                 this.currentTry += letter
             }
         },
-        get gameState() {
-            if (this.tries.map(t => t.toLowerCase()).includes(this.correctWord.toLowerCase())) return true;
-            if (this.tries.length === this.rows) return false;
-            return null;
-        },
-        get result() {
-            let result = "";
-            this.tries.forEach(t => {
-                result += t.split("").map((l, i) => this.states[this.letterState(l, i)]).join("")
-                result += "\n"
-            });
-            return result;
-        },
         isLetter(str) {
             return str.length === 1 && str.match(/[a-z]/i)?.[0];
         },
-            nextWordClicked() {
-                this.enteredTries = [];
-                this.currentTry = '';
-            }
+        nextWordClicked() {
+            this.enteredTries = [];
+            this.currentTry = '';
+        }
+    }))
 })

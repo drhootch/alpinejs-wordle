@@ -14,6 +14,10 @@
 <body>
     <div id="game" x-data="game">
         <div class="message" x-show="gameState!==null">
+            <div x-show="gameState">Well done!
+                <pre x-text="gameResult"></pre>
+            </div>
+            <div x-show="!gameState">The correct word was <span x-text="correctWord"></span></div>
             <button @click="nextWordClicked">Next word</button>
         </div>
         <header>
@@ -23,9 +27,7 @@
             <div id="board-container-aspect">
                 <div id="board">
                     <template x-for="tile in rows*columns">
-                        <div class="tile"
-                            x-text="tries?.[getRowColumn(tile).row]?.[getRowColumn(tile).column] ?? (getRowColumn(tile).row===tries.length ? currentTry?.[getRowColumn(tile).column]: null)"
-                            x-bind:data-state="letterState(tries?.[getRowColumn(tile).row]?.[getRowColumn(tile).column], getRowColumn(tile).column)">
+                        <div class="tile" x-text="getLetter(tile)" x-bind:data-state="getLetterState(tile)">
                         </div>
                     </template>
                 </div>

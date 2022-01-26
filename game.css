@@ -104,6 +104,12 @@ body {
     padding-bottom: 100%;
 }
 
+#board .tile[data-state='tbd'] {
+    background-color: #ffffff;
+    border: 2px solid #878a8c;
+    color: #1a1a1b;
+}
+
 #board .tile[data-state='empty'] {
     border: 2px solid #d3d6da;
 }
