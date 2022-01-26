@@ -9,11 +9,13 @@
     <link rel="stylesheet" href="game.css">
     <script defer src="https://unpkg.com/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="script.js"></script>
+    <script type="text/javascript" src="words.js"></script>
+    <script type="text/javascript" src="script.js"></script>
 </head>
 
 <body>
     <div id="game" x-data="game">
+        <div class="message" x-show="toastMessage!==null" x-text="toastMessage"></div>
         <div class="message" x-show="gameState!==null">
             <div x-show="gameState">Well done!
                 <pre x-text="gameResult"></pre>

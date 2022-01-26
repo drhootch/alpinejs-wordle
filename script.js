@@ -1,4 +1,3 @@
-
 document.addEventListener('alpine:init', () => {
     Alpine.data('game', function () {
         return {
@@ -9,7 +8,9 @@ document.addEventListener('alpine:init', () => {
             },
             columns: 5,
             rows: 6,
-            correctWord: 'great',
+            toastMessage: null,
+            currentWordIndex: this.$persist(Math.floor(Math.random() * answers.length)),
+            get correctWord() { return answers[this.currentWordIndex] },
             currentTry: this.$persist(''),
             enteredTries: this.$persist([]),
             _states: { "correct": "🟩", "present": "🟨", "absent": "⬜" },
@@ -61,7 +62,13 @@ document.addEventListener('alpine:init', () => {
                 this.currentTry = this.currentTry?.slice(0, -1)
             },
             enterClicked() {
-                if (this.currentTry?.length === this.columns) {
+                if (this.currentTry?.length !== this.columns) {
+                    this.showToast("Not enough letters");
+                }
+                else if (![...answers, ...allowedGuesses].includes(this.currentTry)) {
+                    this.showToast("Not in word list");
+                }
+                else {
                     this.enteredTries.push(this.currentTry)
                     this.currentTry = '';
                 }
@@ -77,6 +84,16 @@ document.addEventListener('alpine:init', () => {
             nextWordClicked() {
                 this.enteredTries = [];
                 this.currentTry = '';
+                this.currentWordIndex++;
+                if (this.currentWordIndex >= answers.length) {
+                    this.currentWordIndex = 0;
+                }
+            },
+            showToast(toastMessage) {
+                this.toastMessage = toastMessage
+                setTimeout(() => {
+                    this.toastMessage = null
+                }, 2000)
             }
         }
     })
