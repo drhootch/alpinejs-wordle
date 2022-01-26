@@ -51,6 +51,18 @@ document.addEventListener('alpine:init', () => {
                 }
                 return 'absent';
             },
+            getLetterState(letter) {
+                const letters = [];
+                this.enteredTries.forEach((t, r) => {
+                    t.split("").forEach((l, c) => {
+                        const newState = this.getTileState(r * this.columns + (c + 1));
+                        if(letters[l]!=="correct" || (letters[l]!=="present" && newState==="absent")) {
+                            letters[l] = newState;
+                        }
+                    })
+                });
+                return letters[letter];
+            },
             letterClicked(e) {
                 let letter = null;
                 if (e.target.tagName.toLowerCase() === 'span') {

@@ -39,39 +39,39 @@
         </div>
         <div id="keyboard" @click="letterClicked" @keyup.window="insertLetter(isLetter($event.key))">
             <div class="row">
-                <button><span>q</span></button>
-                <button><span>w</span></button>
-                <button><span>e</span></button>
-                <button><span>r</span></button>
-                <button><span>t</span></button>
-                <button><span>y</span></button>
-                <button><span>u</span></button>
-                <button><span>i</span></button>
-                <button><span>o</span></button>
-                <button><span>p</span></button>
+                <button x-bind:data-state="getLetterState('q')"><span>q</span></button>
+                <button x-bind:data-state="getLetterState('w')"><span>w</span></button>
+                <button x-bind:data-state="getLetterState('e')"><span>e</span></button>
+                <button x-bind:data-state="getLetterState('r')"><span>r</span></button>
+                <button x-bind:data-state="getLetterState('t')"><span>t</span></button>
+                <button x-bind:data-state="getLetterState('y')"><span>y</span></button>
+                <button x-bind:data-state="getLetterState('u')"><span>u</span></button>
+                <button x-bind:data-state="getLetterState('i')"><span>i</span></button>
+                <button x-bind:data-state="getLetterState('o')"><span>o</span></button>
+                <button x-bind:data-state="getLetterState('p')"><span>p</span></button>
             </div>
-            <div class="row">
-                <button><span>a</span></button>
-                <button><span>s</span></button>
-                <button><span>d</span></button>
-                <button><span>f</span></button>
-                <button><span>g</span></button>
-                <button><span>h</span></button>
-                <button><span>j</span></button>
-                <button><span>k</span></button>
-                <button><span>l</span></button>
+            <div class= "row">
+                <button x-bind:data-state="getLetterState('a')"><span>a</span></button>
+                <button x-bind:data-state="getLetterState('s')"><span>s</span></button>
+                <button x-bind:data-state="getLetterState('d')"><span>d</span></button>
+                <button x-bind:data-state="getLetterState('f')"><span>f</span></button>
+                <button x-bind:data-state="getLetterState('g')"><span>g</span></button>
+                <button x-bind:data-state="getLetterState('h')"><span>h</span></button>
+                <button x-bind:data-state="getLetterState('j')"><span>j</span></button>
+                <button x-bind:data-state="getLetterState('k')"><span>k</span></button>
+                <button x-bind:data-state="getLetterState('l')"><span>l</span></button>
             </div>
-            <div class="row">
-                <button @click.stop="enterClicked" @keyup.enter.window="enterClicked">
-                    <span>Enter</span>
-                </button>
-                <button><span>z</span></button>
-                <button><span>x</span></button>
-                <button><span>c</span></button>
-                <button><span>v</span></button>
-                <button><span>b</span></button>
-                <button><span>n</span></button>
-                <button><span>m</span></button>
+            <div class= "row">
+                <button  @click.stop="enterClicked" @keyup.enter.window="enterClicked">
+                    <sp an>Enter</span>
+                </butto n>
+                <button x-bind:data-state="getLetterState('z')"><span>z</span></button>
+                <button x-bind:data-state="getLetterState('x')"><span>x</span></button>
+                <button x-bind:data-state="getLetterState('c')"><span>c</span></button>
+                <button x-bind:data-state="getLetterState('v')"><span>v</span></button>
+                <button x-bind:data-state="getLetterState('b')"><span>b</span></button>
+                <button x-bind:data-state="getLetterState('n')"><span>n</span></button>
+                <button x-bind:data-state="getLetterState('m')"><span>m</span></button>
                 <button @click.stop="removeClicked" @keyup.backspace.window="removeClicked">
                     <span>Delete</span>
                 </button>
