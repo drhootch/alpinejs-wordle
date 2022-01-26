@@ -14,10 +14,7 @@
 <body>
     <div id="game" x-data="game">
         <div class="message" x-show="gameState!==null">
-            <span x-show="gameState">Splendid
-                <pre x-text="result"></pre>
-            </span>
-            <span x-show="!gameState">The correct word was <span x-text="correctWord"></span></span>
+            <button @click="nextWordClicked">Next word</button>
         </div>
         <header>
             <h1>AlpineJS Wordle Clone</h1>
