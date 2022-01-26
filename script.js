@@ -40,10 +40,13 @@ document.addEventListener('alpine:init', () => {
                 if (row === this.enteredTries.length && letter) {
                     return "tbd";
                 }
-                if (!letter) return 'empty';
-                let i = this.correctWord.toLowerCase().indexOf(letter.toLowerCase())
-                if (i >= 0) {
-                    if (i === column) return 'correct';
+                if (!letter) {
+                    return 'empty';
+                }
+                if (this.correctWord.toLowerCase()[column] === letter.toLowerCase()) {
+                    return 'correct';
+                }
+                if (this.correctWord.toLowerCase().includes(letter.toLowerCase())) {
                     return 'present';
                 }
                 return 'absent';
