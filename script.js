@@ -80,7 +80,7 @@ document.addEventListener('alpine:init', () => {
                 if (this.currentTry?.length !== this.columns) {
                     this.showToast("Not enough letters");
                 }
-                else if (![...answers, ...allowedGuesses].includes(this.currentTry)) {
+                else if (![...answers, ...allowedGuesses].includes(this.currentTry.toLowerCase())) {
                     this.showToast("Not in word list");
                 }
                 else {
