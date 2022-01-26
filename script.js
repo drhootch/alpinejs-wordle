@@ -22,7 +22,7 @@ document.addEventListener('alpine:init', () => {
             get gameResult() {
                 let result = "";
                 this.enteredTries.forEach((t, r) => {
-                    result += t.split("").map((l, c) => this._states[this.getLetterState(r * this.columns + (c + 1))]).join("")
+                    result += t.split("").map((l, c) => this._states[this.getTileState(r * this.columns + (c + 1))]).join("")
                     result += "\n"
                 });
                 return result;
@@ -30,13 +30,13 @@ document.addEventListener('alpine:init', () => {
             getRowColumn(tile) {
                 return { row: Math.floor((tile - 1) / this.columns), column: ((tile - 1) % this.columns) }
             },
-            getLetter(tile) {
+            getTileLetter(tile) {
                 const { row, column } = this.getRowColumn(tile);
                 return this.enteredTries?.[row]?.[column] ?? (row === this.enteredTries.length ? this.currentTry?.[column] : null)
             },
-            getLetterState(tile) {
+            getTileState(tile) {
                 const { row, column } = this.getRowColumn(tile);
-                const letter = this.getLetter(tile);
+                const letter = this.getTileLetter(tile);
                 if (row === this.enteredTries.length && letter) {
                     return "tbd";
                 }

@@ -31,7 +31,7 @@
             <div id="board-container-aspect">
                 <div id="board">
                     <template x-for="tile in rows*columns">
-                        <div class="tile" x-text="getLetter(tile)" x-bind:data-state="getLetterState(tile)">
+                        <div class="tile" x-text="getTileLetter(tile)" x-bind:data-state="getTileState(tile)">
                         </div>
                     </template>
                 </div>
